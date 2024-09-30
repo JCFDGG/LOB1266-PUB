@@ -1,14 +1,8 @@
- Instalações sanitárias - São Paulo
-Moradores por Região de Saúde (CIR) e Instal.sanitárias (detalhada)
-Região de Saúde (CIR): 35011 Alto do Tietê, 35012 Franco da Rocha, 35013 Mananciais, 35014 Rota dos Bandeirantes, 35015 Grande ABC, 35016 São Paulo
-Período:2010
-"Região de Saúde (CIR)";"Rede geral de esgoto ou pluvial - não discriminado";"Fossa séptica - não discriminada";"Fossa rudimentar - não discriminada";"Vala - não discriminada";"Rio, lago ou mar";"Outro escoadouro - não discriminado";"Não tem instalação sanitária";"Total"
-"35011 Alto do Tietê";2114669;183216;128858;64405;145043;12695;1539;2650425
-"35012 Franco da Rocha";304094;59549;86818;12789;42543;2169;376;508338
-"35013 Mananciais";606904;144191;149844;16999;51942;9508;510;979898
-"35014 Rota dos Bandeirantes";1354332;141874;59314;33141;92795;24278;811;1706545
-"35015 Grande ABC";2312832;63777;44154;31902;70311;16043;928;2539947
-"35016 São Paulo";10138797;207400;159424;143937;437018;84820;3585;11174981
-"Total";16831628;800007;628412;303173;839652;149513;7749;19560134
- Fonte: IBGE - Censos Demográficos de 1991, 2000 e 2010
- Consulte o site da Secretaria Estadual de Saúde para mais informações.
+Regiï¿½o de Saï¿½de (CIR);Rede geral de esgoto ou pluvial - nï¿½o discriminado;Fossa sï¿½ptica - nï¿½o discriminada;Fossa rudimentar - nï¿½o discriminada;Vala - nï¿½o discriminada;Rio, lago ou mar;Outro escoadouro - nï¿½o discriminado;Nï¿½o tem instalaï¿½ï¿½o sanitï¿½ria;Total
+35011 Alto do Tietï¿½;2114669;183216;128858;64405;145043;12695;1539;2650425
+35012 Franco da Rocha;304094;59549;86818;12789;42543;2169;376;508338
+35013 Mananciais;606904;144191;149844;16999;51942;9508;510;979898
+35014 Rota dos Bandeirantes;1354332;141874;59314;33141;92795;24278;811;1706545
+35015 Grande ABC;2312832;63777;44154;31902;70311;16043;928;2539947
+35016 Sï¿½o Paulo;10138797;207400;159424;143937;437018;84820;3585;11174981
+Total;16831628;800007;628412;303173;839652;149513;7749;19560134
