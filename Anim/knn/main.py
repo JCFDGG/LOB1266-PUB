@@ -2,6 +2,10 @@ from manim import *
 import numpy as np
 from scipy.spatial import distance
 
+seed = 42
+rng = np.random.default_rng(seed)
+
+
 def get_majority_color_from_line_list(input_list):
     '''
     Takes a list of mobjects as inputs, and returns a list of the mode of all colors.
@@ -35,9 +39,9 @@ class KNNAnimation(MovingCameraScene):
     def construct(self):
         # Define cluster points
         zeroth_column = np.array([1,1,0])
-        cluster1 = (np.random.rand(3,3)*-1 + 1) * zeroth_column
-        cluster2 = (np.random.rand(3,3) + 1) * zeroth_column
-        cluster3 = ((np.random.rand(3,3) - 1
+        cluster1 = (rng.random((3,3))*-1 + 1) * zeroth_column
+        cluster2 = (rng.random((3,3)) + 1) * zeroth_column
+        cluster3 = ((rng.random((3,3)) - 1
                      ) * zeroth_column) *np.array([-1, 1, 0])
 
         # Define new point
@@ -56,8 +60,8 @@ class KNNAnimation(MovingCameraScene):
 
         # Cluster lists with each point in a single color
         cluster1_dots = [Dot(point=p, color=BLUE) for p in cluster1]
-        cluster2_dots = [Dot(point=p, color=GREEN) for p in cluster2]
-        cluster3_dots = [Dot(point=p, color=RED) for p in cluster3]
+        cluster2_dots = [Dot(point=p, color=RED) for p in cluster2]
+        cluster3_dots = [Dot(point=p, color=GREEN) for p in cluster3]
 
 
         # List with all np.array points
@@ -85,7 +89,7 @@ class KNNAnimation(MovingCameraScene):
 
         # Create all dots simultaneaously
         self.play(*[Create(dot) for dot in dots_group])
-
+        self.wait(2)
 
 
 
@@ -113,13 +117,13 @@ class KNNAnimation(MovingCameraScene):
                         color=list[1].color) # with the dot color
 
             i+=1
-            self.play(Create(line), run_time=0.1)#np.pi/10) # Plays in 0.314 seconds
+            self.play(Create(line), run_time=np.pi/10) # Plays in 0.314 seconds
 
             line_list.append(line)
 
 
 
-#        self.wait(2)
+        self.wait(2)
         # Remove all points
         #self.play(*[Uncreate(p) for p in all_dots])
         self.remove(*all_dots_group)
@@ -133,30 +137,57 @@ class KNNAnimation(MovingCameraScene):
         self.play(line_group.animate.arrange_in_grid(rows=3, columns=3, # Aligns the lines in a grid
                                                      buff=0.3, #0.1s between each movement
                                                      row_alignments='ccc', col_alignments='ccc'), # up up up left left left alignment
-        new_dot.animate.next_to(line_group, 1.2*UP +0.05 * LEFT, # Puts the dot above the grid
+        new_dot.animate.next_to(line_group, 2.5*UP +0.05 * LEFT, # Puts the dot above the grid
                                 buff=0.5, #0.5 of distance
                                 submobject_to_align=line_group[1]), # align_edge = DOWN does not work in tandem with submobject_to_align
-        self.camera.auto_zoom(mobjects_list, animate=True, margin=3)) # Aligns the camera
+        self.camera.auto_zoom(mobjects_list, animate=True, margin=4)) # Aligns the camera
 
 
 
 
-        k_value_text = Tex('this is a text')
+        k_value_text = Text('k, classe')
         k_value_text.next_to(new_dot, RIGHT)
+        k_value_text.align_to(new_dot, 1.3*UP)
         self.add(k_value_text)
+        self.wait(1)
         for k in range(1, len(line_list)+1): # Iterates over all k_values, from 1 to maximum
             # Draw a surroundingrectangle for each of the lines in line_list[:k]
             # actually you only need to draw for the kth line line_list[k-1], else we'd be redrawing over and over again.'
             self.play(Create(SurroundingRectangle(line_list[k-1])))
-
+            print(k)
             # Get most common colors:
             color_mode_list, is_tie = get_majority_color_from_line_list(line_list[:k])
             if is_tie:
                 # write "Empate" with gradient
-                # change white dot color?
+                # change text
+                self.remove(k_value_text)
+                k_value_text = Text("Empate")
+                k_value_text.next_to(new_dot, RIGHT)
+                self.add(k_value_text)
+                k_value_text.set_color_by_gradient(color_mode_list)
+                k_value_text.align_to(new_dot, UP)
+                new_dot.set_color(WHITE)
+                # Mudar o texto
+                print("Empate em k =", k)
             else:
-                #
-            k_value_text.set_color_by_gradient(*color_mode_list)
+                print(color_mode_list, type(color_mode_list[0]))
+                print(k)
+                self.remove(k_value_text)
+                # Valor da cor pra nome:
+                if color_mode_list[0].to_hex() == "#83C167":
+                    k_value_text = Text("k = %i, verde" % k)
+                    print("k = %i, Verde" % k)
+                if color_mode_list[0].to_hex() == "#58C4DD":
+                    k_value_text = Text("k = %i, azul" % k)
+                    print("k = %i, Azul" % k)
+                # It'll never be red
+                k_value_text.next_to(new_dot, RIGHT)
+                k_value_text.align_to(new_dot, 1.3*UP)
+                self.add(k_value_text)
+                new_dot.set_color(color_mode_list[0])
+                k_value_text.set_color_by_gradient(color_mode_list)
+
+            self.play(Animation(k_value_text.set_color_by_gradient(color_mode_list)))
             # When there is a tie, somehow signal this
 
             self.wait(1)
@@ -208,4 +239,4 @@ class KNNAnimation(MovingCameraScene):
         # Hold final frame
         self.wait(2)
         '''
-        self.wait(3)
+        self.wait(5)
