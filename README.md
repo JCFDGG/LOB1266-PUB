@@ -9,7 +9,7 @@ Este repositório contém material didático desenvolvido para a disciplina **LO
 **Programa:** Programa Unificado de Bolsas (PUB) - Vertente de Ensino
 
 # ⚙️ Como usar
-1. Instale [`git`](https://git-scm.com/downloads) e [Python](https://www.python.org/downloads/) (3.12) em sua máquina.
+1. Instale [`git`](https://git-scm.com/downloads), [`git-lfs`](https://git-lfs.com) e [Python](https://www.python.org/downloads/) (3.12) em sua máquina.
 2. Clone o repositório em um local desejado:  
 `git clone https://github.com/JCFDGG/LOB1266-PUB.git`
 3. Instale as dependências:  
